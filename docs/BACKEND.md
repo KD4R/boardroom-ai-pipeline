@@ -35,13 +35,38 @@ Score categories enum: `market_opportunity, technology, finance, marketing, inno
 - Row Level Security ON for all tables — users can only access their own data
 - Private storage bucket `pitch-decks` (files go in `{user_id}/filename`)
 
+### REST APIs (all require login; return JSON)
+
+**Pitches**
+
+| Method | Endpoint | What it does |
+|---|---|---|
+| GET | `/api/pitches` | List your pitches |
+| POST | `/api/pitches` | Create pitch — body: `startup_name, problem_statement, solution, target_audience, business_model, revenue_model` |
+| GET | `/api/pitches/:id` | Get one pitch |
+| PATCH | `/api/pitches/:id` | Update fields |
+| DELETE | `/api/pitches/:id` | Delete (cascades to meetings) |
+
+**Meetings & debate (Member 2's main endpoints)**
+
+| Method | Endpoint | What it does |
+|---|---|---|
+| GET | `/api/meetings` | List meetings (`?pitch_id=` to filter) |
+| POST | `/api/meetings` | Start meeting — body: `{ pitch_id }` |
+| GET | `/api/meetings/:id` | Full meeting: pitch + transcript + scores + report |
+| PATCH | `/api/meetings/:id` | Update `{ status, decision, overall_score }` |
+| DELETE | `/api/meetings/:id` | Delete meeting |
+| GET | `/api/meetings/:id/messages` | Debate transcript in order |
+| POST | `/api/meetings/:id/messages` | Append `{ agent, content, round }` or `{ messages: [...] }` — ordering handled automatically |
+| GET/POST | `/api/meetings/:id/scores` | Get / upsert `{ scores: [{ agent, category, value }] }` |
+| GET/POST | `/api/meetings/:id/report` | Get / save the final report JSON |
+
+Errors come back as `{ "error": "message" }` with proper status codes (401 not logged in, 400 bad input, 404 not found).
+
 ## 🔜 Not ready yet (in progress)
 
-- REST APIs: `/api/pitches`, `/api/meetings`, `/api/reports` (CRUD)
 - Pitch deck upload endpoint
 - Vercel deployment
-
-Until the APIs exist, query from Server Components directly (see below).
 
 ## How to use it (Members 1 & 2)
 
@@ -83,4 +108,4 @@ const { data, error } = await supabase.from("pitches").insert({
 Use `createClient` from `@/lib/supabase/client` instead (no `await`).
 
 ## Questions
-Ping Sumeet (Member 3).
+Ping Srushti (Member 3).
