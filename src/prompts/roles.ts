@@ -6,10 +6,11 @@ import { CFO_AGENT } from "../agents/cfo";
 import { CMO_AGENT } from "../agents/cmo";
 import { VC_AGENT } from "../agents/vc";
 
-export const EXECUTIVE_ROLES = `
-${CEO_AGENT.role} (${CEO_AGENT.title})
-${CTO_AGENT.role} (${CTO_AGENT.title})
-${CFO_AGENT.role} (${CFO_AGENT.title})
-${CMO_AGENT.role} (${CMO_AGENT.title})
-${VC_AGENT.role} (${VC_AGENT.title})
-`;
+const ALL_AGENTS = [CEO_AGENT, CTO_AGENT, CFO_AGENT, CMO_AGENT, VC_AGENT];
+
+export const EXECUTIVE_ROLES = ALL_AGENTS.map(
+  (agent) => `
+${agent.role} (${agent.title})
+${agent.personality.trim()}
+`
+).join("\n");
