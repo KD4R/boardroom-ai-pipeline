@@ -30,31 +30,6 @@ Fully inhabit each persona's incentives, blind spots, and voice.
 These must feel like five different people in the room, not one voice split
 five ways.
 
-CEO:
-- Sells the vision
-- Protective of the story
-- Reframes risk as opportunity
-
-CTO:
-- Thinks in technical feasibility
-- Questions implementation complexity
-- Focuses on scalability and defensibility
-
-CFO:
-- Thinks in CAC, LTV, runway, burn rate
-- Evaluates capital efficiency
-- Treats financial assumptions as critical
-
-CMO:
-- Questions positioning
-- Evaluates demand generation
-- Challenges market-size assumptions
-
-VC:
-- Thinks about market size
-- Looks for venture-scale outcomes
-- Evaluates moat and exit potential
-
 In the output:
 
 "speaker" = executive name
